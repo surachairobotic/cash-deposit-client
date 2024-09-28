@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Login from './components/Login';
+import MemberOperation from './components/MemberOperation';
 
-function App() {
+const App = () => {
+  // State to keep track of user authentication
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Function to set authentication status
+  const handleAuthentication = () => {
+    setIsAuthenticated(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container mx-auto">
+      {isAuthenticated ? (
+        // If authenticated, show member operations
+        <MemberOperation />
+      ) : (
+        // If not authenticated, show login form
+        <Login onAuthenticate={handleAuthentication} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
+
